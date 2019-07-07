@@ -15,7 +15,7 @@ POST `/user/auth`
 
 #### JSON 参数
 
- - name: 用户姓名
+ - email: 登陆账号
  - password: 用户密码
 
 #### 响应
@@ -30,7 +30,8 @@ POST `/user`
 
 #### JSON 参数
 
- - name: 姓名
+ - name: 昵称
+ - email: 登陆邮箱
  - password: 密码
 
 #### 响应
@@ -38,20 +39,6 @@ POST `/user`
     {
         "status": 201,
         "user_id": 2
-    }
-    
-### 删除用户
-
-DELETE `/user/{user_id}`
-
-#### Header
-
- - Authorization: Bearer {Token}
-
-#### 响应
-
-    {
-        "status": 200
     }
 
 ### 修改密码
@@ -86,7 +73,7 @@ POST `/score`
 #### JSON 参数
 
  - user_id 用户id
- - game_id 游戏id
+ - game 游戏名称
  - score 本次成绩
 
 #### 响应
@@ -94,12 +81,6 @@ POST `/score`
     成功：
     {
         "status": 201,
-        "message": "best score saved"
-    }
-    
-    失败：
-    {
-        
     }
     
 ### 获取游戏成绩列表
@@ -109,7 +90,7 @@ GET '/score'
 #### URL Query 参数
 
  - user_id: 用户id
- - game_id: 游戏id
+ - game: 游戏名称
  - page: 分页
  
 #### 响应
@@ -123,8 +104,9 @@ GET '/score'
             {
                 "id": 1,
                 "user_id": 1,
-                "game_id": 1,
+                "game": '2048',
                 "score": 1,
+                "ip": 
             }
             ...
         ]
