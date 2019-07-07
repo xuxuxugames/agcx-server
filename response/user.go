@@ -13,3 +13,11 @@ func UserAuth(c *gin.Context, userID uint, token string) {
 		"token":   token,
 	})
 }
+
+// UserCreate 用户注册响应
+func UserCreate(c *gin.Context, userID uint) {
+	c.JSON(http.StatusCreated, gin.H{
+		"status":  http.StatusCreated,
+		"user_id": userID,
+	})
+}

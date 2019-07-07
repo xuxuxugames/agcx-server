@@ -26,8 +26,10 @@ func Router() *gin.Engine {
 	// User
 	// 用户认证
 	r.POST("/user/auth", controllers.UserAuth)
-
-	//r.POST("/user", controllers.)
+	// 用户注册
+	r.POST("/user", controllers.UserCreate)
+	// 修改密码
+	r.PUT("/user/:user_id/password", controllers.UserPassword)
 
 	return r
 }
