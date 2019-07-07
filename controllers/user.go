@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"github.com/agcx_server/config"
+	"github.com/agcx_server/requests"
+	"github.com/agcx_server/response"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/szdx4/attsys-server/config"
-	"github.com/szdx4/attsys-server/requests"
-	"github.com/szdx4/attsys-server/response"
 	"time"
 )
 

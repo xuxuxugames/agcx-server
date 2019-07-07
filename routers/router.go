@@ -1,10 +1,10 @@
 package routers
 
 import (
+	"github.com/agcx_server/config"
+	"github.com/agcx_server/controllers"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/szdx4/attsys-server/config"
-	"github.com/szdx4/attsys-server/controllers"
 )
 
 // Router 设置路由和公共中间件，返回 Gin Engine 对象
