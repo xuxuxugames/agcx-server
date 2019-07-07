@@ -1,8 +1,9 @@
 package database
 
 import (
+	"github.com/agcx_server/config"
+	_ "github.com/go-sql-driver/mysql" // mysql driver
 	"github.com/jinzhu/gorm"
-	"github.com/szdx4/attsys-server/config"
 	"log"
 )
 

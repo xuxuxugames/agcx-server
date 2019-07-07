@@ -1,4 +1,4 @@
-package agcx_server
+package main
 
 import (
 	"fmt"

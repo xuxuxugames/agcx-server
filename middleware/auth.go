@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/agcx_server/config"
+	"github.com/agcx_server/response"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/szdx4/attsys-server/config"
-	"github.com/szdx4/attsys-server/response"
 )
 
 // Token 验证 Token 中间件

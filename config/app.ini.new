@@ -17,4 +17,4 @@ TYPE = mysql
 HOST = 127.0.0.1:3306
 USER = root
 PASSWORD = root
-NAME = attsys
+NAME = agcx
