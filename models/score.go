@@ -3,7 +3,8 @@ package models
 // Score 分数模型
 type Score struct {
 	CommonFields
-	UserID uint `json:"user_id"`
-	GameID uint `json:"game_id"`
-	Score  int  `json:"score"`
+	UserID uint   `json:"user_id"`
+	Game   string `json:"game" gorm:"status:enum('2048', 'pacman', 'snake')"`
+	Score  int    `json:"score"`
+	IP     string `json:"ip"`
 }
