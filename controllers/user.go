@@ -32,7 +32,8 @@ func UserAuth(c *gin.Context) {
 
 	// 生成新的 JWT Token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id": user.ID,
+		"id":    user.ID,
+		"email": user.Email,
 		//"role":       user.Role,
 		"expired_at": time.Now().Add(time.Hour * time.Duration(config.App.TokenValid)).Format(time.RFC3339),
 	})
