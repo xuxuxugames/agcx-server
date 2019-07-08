@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/agcx_server/config"
 	"github.com/agcx_server/models"
 	"github.com/agcx_server/requests"
 	"github.com/agcx_server/response"
@@ -41,4 +42,61 @@ func ScoreCreate(c *gin.Context) {
 
 	// 发送响应
 	response.ScoreCreate(c, score.ID)
+}
+
+// ScoreList
+func ScoreList(c *gin.Context) {
+	// 初始化条件查询模型
+	scores := []models.Score{}
+	db := database.Connector
+
+	// 检测用户 ID
+	if userID, isExist := c.GetQuery("user_id"); isExist {
+		userID, _ := strconv.Atoi(userID)
+		user := models.User{}
+		database.Connector.Where("id = ?", userID).First(&user)
+		if user.ID < 1 {
+			response.BadRequest(c, "用户不存在")
+			c.Abort()
+			return
+		} else {
+			db = db.Where("user_id = ?", userID)
+		}
+	}
+
+	// 检测游戏
+	if game, isExist := c.GetQuery("game"); isExist {
+		if game != "2048" && game != "pacman" && game != "snake" {
+			response.BadRequest(c, "游戏筛选请求错误")
+			c.Abort()
+			return
+		} else {
+			db = db.Where("game = ?", game)
+		}
+	}
+
+	// 检测分页
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil {
+		page = 1
+	}
+	if page < 1 {
+		page = 1
+	}
+	perPage := config.App.ItemsPerPage
+	total := 0
+
+	// 执行查询
+	db.Limit(perPage).Offset((page - 1) * perPage).Find(&scores)
+	db.Model(&models.Score{}).Count(&total)
+
+	// 判断当前页是否为空
+	if (page-1)*perPage >= total {
+		response.NoContent(c)
+		c.Abort()
+		return
+	}
+
+	// 发送响应
+	response.ScoreList(c, total, page, scores)
 }
