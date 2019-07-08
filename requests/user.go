@@ -66,19 +66,19 @@ func (r *UserCreateRequest) Validate() error {
 
 // UserPasswordRequest 修改密码请求
 type UserPasswordRequest struct {
-	OldPassword string `json:"old_password"`
+	OldPassword string `json:"old_password" binding:"required"`
 	NewPassword string `json:"new_password" binding:"required"`
 }
 
 // Validate 验证修改密码请求的合法性
-func (r *UserPasswordRequest) Validate(role string, authID, userID int) (string, error) {
+func (r *UserPasswordRequest) Validate(authID, userID int) (string, error) {
 	// 用户必须输入原密码
-	if role == "user" && r.OldPassword == "" {
+	if r.OldPassword == "" {
 		return "", errors.New("原密码缺失")
 	}
 
 	// 用户只能修改自己的密码
-	if role == "user" && authID != userID {
+	if authID != userID {
 		return "", errors.New("您只能修改自己的密码")
 	}
 

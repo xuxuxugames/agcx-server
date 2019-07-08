@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/agcx_server/config"
 	"github.com/agcx_server/controllers"
+	"github.com/agcx_server/middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -29,7 +30,7 @@ func Router() *gin.Engine {
 	// 用户注册
 	r.POST("/user", controllers.UserCreate)
 	// 修改密码
-	r.PUT("/user/:user_id/password", controllers.UserPassword)
+	r.PUT("/user/:user_id/password", middleware.Token, controllers.UserPassword)
 
 	return r
 }

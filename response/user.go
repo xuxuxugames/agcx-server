@@ -21,3 +21,10 @@ func UserCreate(c *gin.Context, userID uint) {
 		"user_id": userID,
 	})
 }
+
+// UserPassword 修改密码响应
+func UserPassword(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"status": http.StatusOK,
+	})
+}

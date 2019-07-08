@@ -9,6 +9,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"strconv"
 	"time"
 )
 
@@ -89,17 +90,43 @@ func UserCreate(c *gin.Context) {
 
 // UserPassword 修改密码
 func UserPassword(c *gin.Context) {
+	// 获取认证用户信息
+	authID, exist := c.Get("user_id")
+	if !exist {
+		response.BadRequest(c, "slkfjdklsf")
+		c.Abort()
+		return
+	}
+
+	// 获取 URL 中用户 ID
+	userID, err := strconv.Atoi(c.Param("user_id"))
+	if err != nil {
+		response.BadRequest(c, "UserID获取错误")
+		c.Abort()
+		return
+	}
+
 	var req requests.UserPasswordRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Bad Request")
+		response.BadRequest(c, "错误请求")
 		c.Abort()
 		return
 	}
 
 	// 验证提交数据的合法性
-	if err := req.Validate(); err != nil {
+	pwdHash, err := req.Validate(authID.(int), int(userID))
+	if err != nil {
 		response.BadRequest(c, err.Error())
 		c.Abort()
 		return
 	}
+
+	// 执行修改密码操作
+	user := models.User{}
+	database.Connector.First(&user, userID)
+	user.Password = pwdHash
+	database.Connector.Save(&user)
+
+	// 发送响应
+	response.UserPassword(c)
 }
