@@ -31,6 +31,8 @@ func Router() *gin.Engine {
 	r.POST("/user", controllers.UserCreate)
 	// 修改密码
 	r.PUT("/user/:user_id/password", middleware.Token, controllers.UserPassword)
+	// 保存成绩
+	r.POST("/score/:user_id", middleware.Token, controllers.ScoreCreate)
 
 	return r
 }
