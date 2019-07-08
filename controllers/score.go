@@ -5,6 +5,7 @@ import (
 	"github.com/agcx_server/models"
 	"github.com/agcx_server/requests"
 	"github.com/agcx_server/response"
+	"github.com/agcx_server/utils/common"
 	"github.com/agcx_server/utils/database"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -73,6 +74,28 @@ func ScoreList(c *gin.Context) {
 		} else {
 			db = db.Where("game = ?", game)
 		}
+	}
+
+	// 检测开始时间
+	if startAt, isExist := c.GetQuery("start_at"); isExist {
+		startAt, err := common.ParseTime(startAt)
+		if err != nil {
+			response.BadRequest(c, "开始时间格式错误")
+			c.Abort()
+			return
+		}
+		db = db.Where("create_at >= ?", startAt)
+	}
+
+	// 检测结束时间
+	if endAt, isExist := c.GetQuery("end_at"); isExist {
+		endAt, err := common.ParseTime(endAt)
+		if err != nil {
+			response.BadRequest(c, "结束时间格式错误")
+			c.Abort()
+			return
+		}
+		db = db.Where("create_at <= ?", endAt)
 	}
 
 	// 检测分页

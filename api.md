@@ -92,6 +92,8 @@ GET '/score'
  - user_id: 用户id
  - game: 游戏名称
  - page: 分页
+ - start_at: 开始时间
+ - end_at: 结束时间
  
 #### 响应
  
