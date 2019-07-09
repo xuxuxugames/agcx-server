@@ -89,7 +89,6 @@ GET '/score'
 
 #### URL Query 参数
 
- - user_id: 用户id
  - game: 游戏名称
  - page: 分页
  - start_at: 开始时间
