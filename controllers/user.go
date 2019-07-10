@@ -17,7 +17,7 @@ import (
 func UserAuth(c *gin.Context) {
 	var req requests.UserAuthRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Bad Request")
+		response.BadRequest(c, "错误请求")
 		c.Abort()
 		return
 	}
@@ -34,6 +34,7 @@ func UserAuth(c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id":    user.ID,
 		"email": user.Email,
+		"name":  user.Name,
 		//"role":       user.Role,
 		"expired_at": time.Now().Add(time.Hour * time.Duration(config.App.TokenValid)).Format(time.RFC3339),
 	})
@@ -52,7 +53,7 @@ func UserAuth(c *gin.Context) {
 func UserCreate(c *gin.Context) {
 	var req requests.UserCreateRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, "Bad Request")
+		response.BadRequest(c, "错误请求")
 		c.Abort()
 		return
 	}

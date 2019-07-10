@@ -36,7 +36,7 @@ func Router() *gin.Engine {
 	// 保存成绩
 	r.POST("/score/:user_id", middleware.Token, controllers.ScoreCreate)
 	// 获取用户列表
-	r.GET("/score", middleware.Token, controllers.ScoreList)
+	r.GET("/score", controllers.ScoreList)
 
 	return r
 }

@@ -33,6 +33,7 @@ func ScoreCreate(c *gin.Context) {
 		UserID: uint(userID),
 		Game:   req.Game,
 		Score:  req.Score,
+		IP:     c.ClientIP(),
 	}
 	database.Connector.Create(&score)
 	if score.ID < 1 {
@@ -50,20 +51,6 @@ func ScoreList(c *gin.Context) {
 	// 初始化条件查询模型
 	scores := []models.Score{}
 	db := database.Connector
-
-	// 检测用户 ID
-	if userID, isExist := c.GetQuery("user_id"); isExist {
-		userID, _ := strconv.Atoi(userID)
-		user := models.User{}
-		database.Connector.Where("id = ?", userID).First(&user)
-		if user.ID < 1 {
-			response.BadRequest(c, "用户不存在")
-			c.Abort()
-			return
-		} else {
-			db = db.Where("user_id = ?", userID)
-		}
-	}
 
 	// 检测游戏
 	if game, isExist := c.GetQuery("game"); isExist {
@@ -84,7 +71,7 @@ func ScoreList(c *gin.Context) {
 			c.Abort()
 			return
 		}
-		db = db.Where("create_at >= ?", startAt)
+		db = db.Where("created_at >= ?", startAt)
 	}
 
 	// 检测结束时间
@@ -95,7 +82,7 @@ func ScoreList(c *gin.Context) {
 			c.Abort()
 			return
 		}
-		db = db.Where("create_at <= ?", endAt)
+		db = db.Where("created_at <= ?", endAt)
 	}
 
 	// 检测分页
@@ -110,7 +97,7 @@ func ScoreList(c *gin.Context) {
 	total := 0
 
 	// 执行查询
-	db.Limit(perPage).Offset((page - 1) * perPage).Find(&scores)
+	db.Preload("User").Limit(perPage).Offset((page - 1) * perPage).Order("score desc").Find(&scores)
 	db.Model(&models.Score{}).Count(&total)
 
 	// 判断当前页是否为空
