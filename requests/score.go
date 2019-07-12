@@ -17,7 +17,7 @@ type ScoreCreateRequest struct {
 // Validate 验证 ScoreCreateRequest 请求中用户信息的有效性
 func (r *ScoreCreateRequest) Validate(c *gin.Context) error {
 	// 验证游戏名称的有效性
-	if r.Game != "2048" && r.Game != "pacman" && r.Game != "snake" {
+	if r.Game != "2048" && r.Game != "snake" && r.Game != "tetris" {
 		return errors.New("游戏名称错误")
 	}
 

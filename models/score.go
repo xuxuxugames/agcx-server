@@ -4,7 +4,7 @@ package models
 type Score struct {
 	CommonFields
 	UserID uint   `json:"-"`
-	Game   string `json:"game" gorm:"status:enum('2048', 'pacman', 'snake')"`
+	Game   string `json:"game" gorm:"status:enum('2048','snake','tetris')"`
 	Score  uint   `json:"score"`
 	IP     string `json:"ip"`
 	User   User   `json:"user"`

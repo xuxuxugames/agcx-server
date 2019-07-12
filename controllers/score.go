@@ -54,7 +54,7 @@ func ScoreList(c *gin.Context) {
 
 	// 检测游戏
 	if game, isExist := c.GetQuery("game"); isExist {
-		if game != "2048" && game != "pacman" && game != "snake" {
+		if game != "2048" && game != "snake" && game != "tetris" {
 			response.BadRequest(c, "游戏筛选请求错误")
 			c.Abort()
 			return
