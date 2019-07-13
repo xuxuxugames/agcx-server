@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/routers"
-	"github.com/agcx_server/utils/database"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/routers"
+	"github.com/xuxuxugames/agcx-server/utils/database"
 	"log"
 	"net/http"
 )

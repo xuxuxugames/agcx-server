@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/response"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/response"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )

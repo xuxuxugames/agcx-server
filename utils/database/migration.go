@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/agcx_server/models"
+	"github.com/xuxuxugames/agcx-server/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

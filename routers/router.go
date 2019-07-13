@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/controllers"
-	"github.com/agcx_server/middleware"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/controllers"
+	"github.com/xuxuxugames/agcx-server/middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )

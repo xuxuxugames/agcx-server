@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/models"
-	"github.com/agcx_server/requests"
-	"github.com/agcx_server/response"
-	"github.com/agcx_server/utils/database"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/models"
+	"github.com/xuxuxugames/agcx-server/requests"
+	"github.com/xuxuxugames/agcx-server/response"
+	"github.com/xuxuxugames/agcx-server/utils/database"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"

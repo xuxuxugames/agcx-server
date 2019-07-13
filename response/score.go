@@ -1,8 +1,8 @@
 package response
 
 import (
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/models"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

@@ -2,9 +2,9 @@ package requests
 
 import (
 	"errors"
-	"github.com/agcx_server/config"
-	"github.com/agcx_server/models"
-	"github.com/agcx_server/utils/database"
+	"github.com/xuxuxugames/agcx-server/config"
+	"github.com/xuxuxugames/agcx-server/models"
+	"github.com/xuxuxugames/agcx-server/utils/database"
 	"golang.org/x/crypto/bcrypt"
 	"strconv"
 )
